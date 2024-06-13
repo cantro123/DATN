@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Dangky">
+    <TextView
+        android:text="Đăng ký"
+        android:textSize="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:textColor="#00BCD4"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:drawableRight="@drawable/ic_taikhoan"
+        android:id="@+id/dktaikhoan"
+        android:hint="Tên tài khoản"
+        android:layout_marginTop="90dp"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:drawableRight="@drawable/ic_matkhau"
+        android:id="@+id/dkmatkhau"
+        android:hint="Mật khẩu"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:drawableRight="@drawable/ic_email"
+        android:id="@+id/dkemail"
+        android:hint="Email"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/dkdangky"
+        android:text="Đăng ký"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/dkdangnhap"
+        android:text="Trở về đăng nhập"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
