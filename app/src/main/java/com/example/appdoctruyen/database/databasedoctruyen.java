@@ -6,15 +6,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.appdoctruyen.dangnhap;
 import com.example.appdoctruyen.model.TaiKhoan;
+import com.example.appdoctruyen.model.Truyen;
 
 import java.sql.SQLClientInfoException;
 import java.sql.SQLData;
+import java.util.ArrayList;
+import java.util.List;
 
 public class databasedoctruyen extends SQLiteOpenHelper {
+
 
     //cơ sở dữ liệu
 
@@ -29,8 +35,11 @@ public class databasedoctruyen extends SQLiteOpenHelper {
     private static String PHAN_QUYEN = "phanquyen";
     private static String EMAIL = "email";
 
+
     //version
-    private static int VERSION = 1;
+    private static int VERSION = 2;
+
+
 
 
     //biến bảng truyện
@@ -39,6 +48,9 @@ public class databasedoctruyen extends SQLiteOpenHelper {
     private static String TEN_TRUYEN = "tieude";
     private static String NOI_DUNG = "noidung";
     private static String IMAGE = "anh";
+    private static String THELOAI="theloai";
+
+
 
     //contexet
     private Context context;
@@ -48,18 +60,23 @@ public class databasedoctruyen extends SQLiteOpenHelper {
             +TEN_TAI_KHOAN+" TEXT UNIQUE, "
             +MAT_KHAU+" TEXT, "
             +EMAIL+" TEXT, "
+
             + PHAN_QUYEN+" INTEGER) ";
     //biến lưu câu lệnh tạo bảng truyện
 
     private String SQLQuery1 = "CREATE TABLE "+ TABLE_TRUYEN +" ( "+ID_TRUYEN+" integer primary key AUTOINCREMENT, "
             +TEN_TRUYEN+" TEXT UNIQUE, "
             +NOI_DUNG+" TEXT, "
-            +IMAGE+" TEXT, "+ID_TAI_KHOAN+" INTEGER , FOREIGN KEY ( "+ ID_TAI_KHOAN +" ) REFERENCES "+
+            +IMAGE+" TEXT,"
+            +THELOAI+"TEXT,"
+            +ID_TAI_KHOAN+" INTEGER , FOREIGN KEY ( "+ ID_TAI_KHOAN +" ) REFERENCES "+
             TABLE_TAIKHOAN+"("+ID_TAI_KHOAN+"))";
+
+    // Cập nhật câu lệnh tạo bảng truyện
 
 
     //insert dữ liệu vào bảng tài khoản
-    //chú ý phân quyền 1 là admin 2 là người dùng
+    //chú ý phân quyền 2 là admin, 1 là người dùng
     private String SQLQuery2 = "INSERT INTO TaiKhoan VAlUES (null,'admin','admin','admin@gmail.com',2)";
     private String SQLQuery3 = "INSERT INTO TaiKhoan VAlUES (null,'can','can','can@gmail.com',1)";
 
@@ -221,6 +238,8 @@ public class databasedoctruyen extends SQLiteOpenHelper {
     //tạo bảng phương thức
     public databasedoctruyen(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
+
+
     }
 
     @Override
@@ -235,45 +254,101 @@ public class databasedoctruyen extends SQLiteOpenHelper {
         db.execSQL(SQLQuery6);
         db.execSQL(SQLQuery7);
         db.execSQL(SQLQuery8);
-    
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // Xóa bảng cũ nếu tồn tại
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAIKHOAN);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRUYEN);
+        // Tạo lại bảng
+        onCreate(db);
     }
 
     public Cursor getData(){
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor res =db.rawQuery(" SELECT * FROM "+TABLE_TAIKHOAN,null );
-        return res;
+       Cursor res =db.rawQuery("SELECT * FROM "+ TABLE_TAIKHOAN,null);
+       return res;
     }
+
+
+    // add tai khoan vao database
 
     public void AddTaiKhoan(TaiKhoan taiKhoan){
         SQLiteDatabase db= this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(TEN_TAI_KHOAN,taiKhoan.getmTenTaiKhoan());
-        values.put(MAT_KHAU,taiKhoan.getmMatKhau());
-        values.put(EMAIL,taiKhoan.getmEmail());
-        values.put(PHAN_QUYEN,taiKhoan.getPhanQuyen());
+        // thuc hien insert thong qua values
+            ContentValues values = new ContentValues();
+            values.put(TEN_TAI_KHOAN,taiKhoan.getmTenTaiKhoan());
+            values.put(MAT_KHAU,taiKhoan.getmMatKhau());
+            values.put(EMAIL,taiKhoan.getmEmail());
+            values.put(PHAN_QUYEN,taiKhoan.getPhanQuyen());
 
-        db.insert(TABLE_TAIKHOAN, null,values);
+            db.insert(TABLE_TAIKHOAN, null,values);
 
-        db.close();
-        Log.e("ADD TK","TC");
+            db.close();
+            Log.e("ADD TK","TC");
+        }
 
-    }
 
     public Cursor getData1(){
         SQLiteDatabase db = this.getReadableDatabase();
-
-
-        Cursor res = db.rawQuery("SELECT * FROM "+TABLE_TRUYEN+" ORDER BY "+ID_TRUYEN+" DESC LIMIT 3",null);
+        Cursor res = db.rawQuery(" SELECT * FROM "+TABLE_TRUYEN,null);
         return res;
-
-
     }
 
+    // lay tat ca truyen
+// add truyen
+    public void AddTruyen(Truyen truyen){
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(TEN_TRUYEN,truyen.getTenTruyen());
+        values.put(NOI_DUNG,truyen.getNoiDung());
+        values.put(IMAGE,truyen.getAnh());
+        values.put(ID_TAI_KHOAN,truyen.getID_TK());
+        values.put(THELOAI, truyen.getTheLoai());
+        db.insert("truyen"   ,null,values);
+        db.close();
+    }
+
+    //delete truyen
+    public  int Delete(int i){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int res = db.delete(TABLE_TRUYEN,ID_TRUYEN+" = " +i,null);
+        return res;
+    }
+
+
+    // Phương thức để lấy truyện theo thể loại
+    public Cursor getData3(String theloai) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+//        String tieude1 = "rnhdtthd";
+        return db.rawQuery("SELECT * FROM truyen WHERE theloai=?", new String[]{"1"});
+    }
+//    public Cursor getData3(String theloai) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        return db.rawQuery("SELECT * FROM TABLE_TRUYEN WHERE theloai = ?", new String[]{theloai});
+//    }
+
+    public void updateUser(String oldUsername, String newUsername, String newEmail, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", newUsername);
+        values.put("email", newEmail);
+        if (!newPassword.isEmpty()) {
+            values.put("password", newPassword);
+        }
+
+        db.update(TABLE_TAIKHOAN, values, "username=?", new String[]{oldUsername});
+    }
+
+
 }
+
+
+
+
+

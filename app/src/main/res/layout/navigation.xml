@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <LinearLayout
+        android:orientation="vertical"
+        
+        android:background="@drawable/bg"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_marginLeft="10px"
+            android:layout_marginTop="10dp"
+            android:layout_width="90dp"
+            android:scrollX="10px"
+            android:layout_height="80dp"
+            android:src="@drawable/user_name"></ImageView>
+
+        <TextView
+            android:text="Cần Trô"
+            android:textStyle="bold"
+            android:textColor="#F44336"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/Textname"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/textgmail"
+            android:layout_marginLeft="10dp"
+            android:textColor="#D6B140"
+            android:text="can@gmail.com"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="online"
+            android:textStyle="bold"
+            android:textColor="#03A9F4"
+            android:id="@+id/textTrangThai"
+            android:layout_marginLeft="10dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnsua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="-50dp"
+            android:layout_marginLeft="10dp"
+            android:text="Cập nhật thông tin"
+            android:textColor="#03A9F4"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

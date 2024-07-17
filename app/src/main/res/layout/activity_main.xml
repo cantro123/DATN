@@ -26,10 +26,17 @@
                 android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
-                android:background="#FFFFFF"
                 android:id="@+id/viewflipper"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"></ViewFlipper>
+                android:layout_height="150dp"
+                android:background="#FFFFFF"></ViewFlipper>
+
+            <Spinner
+                android:id="@+id/spinnerGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"/>
+
 
             <LinearLayout
                 android:background="#FFFFFF"
@@ -49,6 +56,8 @@
                 <ListView
 
                     android:id="@+id/listviewNew"
+                    android:background="#C9F3F8"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></ListView>
 

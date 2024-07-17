@@ -37,36 +37,39 @@ public class Dangky extends AppCompatActivity {
 
 
         AnhXa();
-        btnDKDangKy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String taikhoan = edtDKTaiKhoan.getText().toString();
-                String matkhau = edtDKMatKhau.getText().toString();
-                String email = edtDKEmail.getText().toString();
 
-                TaiKhoan taiKhoan1 =CreateTaiKhoan();
-                if (taikhoan.equals("")|| matkhau.equals("") ||email.equals("")){
-                    Log.e("Thông báo:", "Chưa nhập đầy đủ thông tin");
+            btnDKDangKy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                }
-                else {
-                    databasedoctruyen.AddTaiKhoan(taiKhoan1);
-                    Toast.makeText(Dangky.this,"Đăng ký thành công",Toast.LENGTH_SHORT).show();
+                    String taikhoan = edtDKTaiKhoan.getText().toString();
+                    String matkhau = edtDKMatKhau.getText().toString();
+                    String email = edtDKEmail.getText().toString();
 
-                }
+                    TaiKhoan taiKhoan1 =CreateTaiKhoan();
+                    if (taikhoan.equals("") || matkhau.equals("") ||email.equals("")){
+                        Log.e("Thông báo:", "Chưa nhập đầy đủ thông tin");
 
-            }
-        });
+                    }
+                    else {
+                        databasedoctruyen.AddTaiKhoan(taiKhoan1);
+                        Toast.makeText(Dangky.this,"Đăng ký thành công",Toast.LENGTH_SHORT).show();
 
-        btnDKDangKy.setOnClickListener(new View.OnClickListener() {
+                    }
+
+                    }
+            });
+
+
+
+        btnDKDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
     }
-
-
+    //pt tao  tai khoan
     private TaiKhoan CreateTaiKhoan(){
         String taikhoan = edtDKTaiKhoan.getText().toString();
         String matkhau = edtDKMatKhau.getText().toString();

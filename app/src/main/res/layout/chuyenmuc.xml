@@ -3,19 +3,22 @@
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:layout_height="match_parent">
+
     <ImageView
-        android:layout_gravity="center"
-        android:id="@+id/imgNewTruyen"
+        android:id="@+id/imgchuyenmuc"
         android:layout_width="90dp"
         android:layout_height="80dp"/>
 
     <TextView
-        android:text="Tên Truyện"
-        android:layout_gravity="center"
-        android:textStyle="bold"
+        android:text="Tên chuyên mục "
         android:gravity="center"
-        android:id="@+id/tvTenTruyennew"
+        android:id="@+id/tvTenchuyenmuc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+
+
 
 </LinearLayout>

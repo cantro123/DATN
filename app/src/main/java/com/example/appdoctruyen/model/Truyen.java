@@ -1,26 +1,36 @@
 package com.example.appdoctruyen.model;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Truyen {
     private int ID;
     private  String TenTruyen;
     private String NoiDung;
     private  String Anh;
     private  int ID_TK;
+    private String theLoai;
 
-    public Truyen(String tenTruyen, String noiDung, String anh, int ID_TK) {
+    public Truyen(String tenTruyen, String noiDung, String anh, int ID_TK,String theLoai) {
         TenTruyen = tenTruyen;
         NoiDung = noiDung;
         Anh = anh;
         this.ID_TK = ID_TK;
+        this.theLoai = theLoai;
+
     }
 
-    public Truyen(int ID, String tenTruyen, String noiDung, String anh, int ID_TK) {
+    public Truyen(int ID, String tenTruyen, String noiDung, String anh, int ID_TK,String theLoai) {
         this.ID = ID;
         TenTruyen = tenTruyen;
         NoiDung = noiDung;
         Anh = anh;
         this.ID_TK = ID_TK;
+        this.theLoai = theLoai;
+
     }
+
 
     public int getID() {
         return ID;
@@ -54,11 +64,21 @@ public class Truyen {
         Anh = anh;
     }
 
+
     public int getID_TK() {
         return ID_TK;
     }
 
     public void setID_TK(int ID_TK) {
         this.ID_TK = ID_TK;
+    }
+
+
+    public String getTheLoai() {
+        return theLoai;
+    }
+
+    public void setTheLoai(String theLoai) {
+        this.theLoai = theLoai;
     }
 }

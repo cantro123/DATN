@@ -20,6 +20,7 @@ public class AdapterTruyen extends BaseAdapter {
     private ArrayList<Truyen> listTruyen;
 
     public AdapterTruyen(Context context, ArrayList<Truyen> listTruyen) {
+
         this.context = context;
         this.listTruyen = listTruyen;
     }
@@ -37,6 +38,12 @@ public class AdapterTruyen extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    //filter
+    public void filterdList(ArrayList<Truyen> filteredList) {
+        listTruyen = filteredList;
+        notifyDataSetChanged();
     }
 
     public  class ViewHolder{
@@ -61,6 +68,7 @@ public class AdapterTruyen extends BaseAdapter {
         Picasso.get().load(truyen.getAnh()).placeholder(R.drawable.ic_tai_ve).error(R.drawable.ic_image).into(viewHolder.imgTruyen);
         return convertView;
     }
+
 
 
 }
